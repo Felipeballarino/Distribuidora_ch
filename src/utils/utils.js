@@ -42,6 +42,13 @@ export const individualMensajeWhatsApp = (producto) => {
     return mensaje;
 };
 
+export const generalMensajeWhatsApp = () => {
+
+    let mensaje = "Hola, me comunico desde la web, mi consulta es la siguiente:%0A%0A";
+
+    return mensaje;
+};
+
 
 export const formatearPrecio = (numero) => {
     return new Intl.NumberFormat('es-AR', {

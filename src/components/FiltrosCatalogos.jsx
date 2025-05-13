@@ -25,9 +25,9 @@ const FiltrosCatalogos = ({
         }
     }
     return (
-        <div className="flex flex-col gap-4 mb-6 col-span-2">
-            <div className="border px-3 py-2 rounded">
-                <h1 className="font-bold text-xl mb-2">Categorías</h1>
+        <div className="flex md:flex-col gap-4 mb-6 col-span-2">
+            <div className="border-[#d82737] border-2 px-3 py-2 rounded w-1/2 md:w-full">
+                <h1 className="font-bold text-xl mb-2 text-[#d82737]">Categorías</h1>
                 <ul className="flex flex-col gap-1">
                     {categorias.map(cat => (
                         <Checkbox
@@ -41,8 +41,8 @@ const FiltrosCatalogos = ({
                 </ul>
             </div>
 
-            <div className="border px-3 py-2 rounded">
-                <h1 className="font-bold text-xl mb-2">Marcas</h1>
+            <div className="border-[#d82737] border-2 px-3 py-2 rounded w-1/2 md:w-full">
+                <h1 className="font-bold text-xl mb-2 text-[#d82737]">Marcas</h1>
                 <ul className="flex flex-col gap-1">
                     {marcas.map(marca => (
                         <Checkbox

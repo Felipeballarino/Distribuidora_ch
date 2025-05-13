@@ -3,7 +3,6 @@ import { useSearchParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import Layout from '../components/Layout';
 import FiltrosCatalogos from '../components/FiltrosCatalogos';
-import ProductCard from '../components/ProductCard';
 import { useGlobalData } from '../context/data/useGlobalData';
 import ProductCardWpp from '../components/ProductCardWpp';
 
@@ -43,8 +42,8 @@ const Productos = () => {
     })
 
     return (
-        <Layout>
-            <div className="p-6 grid grid-cols-8 gap-4">
+        <Layout >
+            <div className="p-6 md:grid md:grid-cols-8 flex flex-col gap-4 min-h-screen">
                 <FiltrosCatalogos
                     marcas={marcas}
                     categorias={categorias}
@@ -53,10 +52,7 @@ const Productos = () => {
                     categoriaSeleccionada={categoriaSeleccionada}
                     setCategoriaSeleccionada={setCategoriaSeleccionada}
                 />
-                <div className='col-span-6 grid grid-cols-3 gap-4 '>
-                    {/* {productosFiltrados.map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                    ))} */}
+                <div className='md:col-span-6 md:grid md:grid-cols-3 gap-4 '>
                     {productosFiltrados.map((product) => (
                         <ProductCardWpp key={product.id} product={product} />
                     ))}

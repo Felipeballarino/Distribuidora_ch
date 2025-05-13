@@ -1,51 +1,44 @@
-import { Button } from 'antd'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Login from './Login'
 import { useAuth } from '../context/auth/useAuth'
-
-
-const Header = ({ showDrawer }) => {
+import { LoginOutlined, LogoutOutlined } from '@ant-design/icons'
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
+const Header = () => {
     const [modalOpen, setModalOpen] = useState(false);
 
     const { user, logout } = useAuth()
 
-    const roleView = ["super_admin", "admin"]
     return (
-        <div className='border-b w-full flex justify-between items-center px-4 py-6'>
-            <div>
+        <header className='w-full flex justify-between items-center px-10  bg-[#d82737] fixed z-100 h-[80px]'>
+            <Link to={"/"}>
                 <h1>logo</h1>
-            </div>
+            </Link>
             <div>
-                <ul className='flex gap-8'>
-                    <li>
-                        <Link to={"/"}>Inicio</Link>
-                    </li>
-                    <li>
-                        <Link to={"/productos"}>Catalogo</Link>
-                    </li>
-                    {roleView.includes(user?.role) && <li>
-                        <Link to={"/admin"}>Administrador</Link>
-                    </li>}
-                </ul>
-            </div>
-            <div>
-                {/* <Button onClick={showDrawer}>
-                    carrito
-                </Button> */}
-                {/* <Avatar icon={<UserOutlined />} /> */}
                 {user ?
-                    <Button onClick={logout}>
-                        Logout
-                    </Button>
+                    <>
+                        <button onClick={logout} className='text-white hidden md:flex text-center cursor-pointer'>
+                            <LogoutOutlined /> Cerrar sesión
+                        </button>
+                        <button onClick={logout} className='text-white flex md:hidden flex-col text-center cursor-pointer'>
+                            <LogoutIcon /> Cerrar
+                        </button>
+                    </>
+
                     :
-                    <Button onClick={() => setModalOpen(true)}>
-                        login
-                    </Button>
+                    <>
+                        <button onClick={() => setModalOpen(true)} className='text-white text-center cursor-pointer text-sm hidden md:flex gap-1'>
+                            <LoginOutlined /> Iniciar sesión
+                        </button>
+                        <button onClick={() => setModalOpen(true)} className='text-white flex md:hidden flex-col justify-center items-center text-center cursor-pointer text-sm'>
+                            <LoginIcon /> Ingresar
+                        </button>
+                    </>
                 }
             </div>
             <Login open={modalOpen} onClose={() => setModalOpen(false)} />
-        </div >
+        </header >
     )
 }
 

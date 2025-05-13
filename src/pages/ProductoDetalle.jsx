@@ -4,8 +4,7 @@ import { useParams } from 'react-router-dom'
 import { getProductByID } from '../services/productServices'
 import foto1 from "../assets/remera.webp"
 import { Divider } from 'antd'
-import SwiperImagenes from '../components/SwiperImagen'
-import { useGlobalCart } from '../context/cart/useGlobalCart'
+// import SwiperImagenes from '../components/SwiperImagen'
 import CircleIcon from '@mui/icons-material/Circle';
 import Swal from 'sweetalert2'
 import { aplicarDescuento, formatearPrecio } from '../utils/utils'
@@ -16,7 +15,6 @@ const ProductoDetalle = () => {
     const [colorSeleccionado, setColorSeleccionado] = useState(null)
     const [talleSeleccionado, setTalleSeleccionado] = useState(null)
 
-    const { addToCart } = useGlobalCart()
 
     useEffect(() => {
         const fetchProducto = async () => {
@@ -60,16 +58,16 @@ const ProductoDetalle = () => {
             nombreColor: colorSeleccionado.nombreColor,
             talle: talleSeleccionado.talle,
         }
-        addToCart(product, 1);
+        console.log(product)
     };
 
-    const imagenes = [foto1, foto1, foto1, foto1, foto1, foto1]
+    // const imagenes = [foto1, foto1, foto1, foto1, foto1, foto1]
 
     return (
         <Layout>
             <div className='grid grid-cols-2'>
                 <div className='min-h-150'>
-                    <SwiperImagenes imagenes={imagenes} />
+                    {/* <SwiperImagenes imagenes={imagenes} /> */}
                 </div>
                 <div className='px-10 flex flex-col justify-between'>
                     <div>
