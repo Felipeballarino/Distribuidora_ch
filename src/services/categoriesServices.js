@@ -1,36 +1,29 @@
-const API_URL = 'http://localhost:3000/categorias';
+import Cookies from 'js-cookie';
+
+const API_URL = 'https://tiendagesip-production.up.railway.app/api/grupos/1';
 
 export const getCategories = async () => {
-    const res = await fetch(API_URL);
-    return res.json();
+    try {
+        const TOKEN_USER = Cookies.get('user_data_token');
+
+        const res = await fetch(API_URL, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN_USER}`
+            }
+        });
+        if (!res.ok) {
+            const errorText = await res.text();
+            throw new Error(`Error ${res.status}: ${errorText}`);
+        }
+
+        const data = await res.json();
+        return data;
+
+    } catch (error) {
+        console.error('Error al obtener categorias:', error);
+        return []; // Podés devolver un array vacío u otro fallback
+    }
 };
 
-export const getCategoriesByID = async (id) => {
-    const res = await fetch(`${API_URL}/${id}`);
-    return res.json();
-};
-
-export const createCategories = async (userData) => {
-    const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(userData),
-    });
-    return res.json();
-};
-
-export const updateCategories = async (id, userData) => {
-    const res = await fetch(`${API_URL}/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(userData),
-    });
-    return res.json();
-};
-
-export const deleteCategories = async (id) => {
-    const res = await fetch(`${API_URL}/${id}`, {
-        method: 'DELETE',
-    });
-    return res.ok;
-};

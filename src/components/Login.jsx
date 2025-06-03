@@ -1,12 +1,9 @@
 import { Modal, Input, Button, Typography } from 'antd';
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { loginUser } from "../services/usersSerivices"
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/auth/useAuth';
 import Swal from 'sweetalert2'
-
-
 const { Title, Text } = Typography;
 
 
@@ -17,17 +14,14 @@ const Login = ({ open, onClose }) => {
 
     const { login } = useAuth();
 
-    const navigate = useNavigate();
 
     const handleLogin = async () => {
         setLoading(true);
-        const user = await loginUser(usuario, password);
-        setLoading(false);
+        const data = await loginUser(usuario, password);
 
-        if (user) {
-            login(user);
+        if (data) {
+            login(data);
             onClose();
-            navigate('/admin');
         } else {
             Swal.fire({
                 icon: "error",
@@ -35,6 +29,7 @@ const Login = ({ open, onClose }) => {
                 text: "Correo o contraseña incorrectos.",
             });
         }
+        setLoading(false);
     };
 
     return (
@@ -50,7 +45,7 @@ const Login = ({ open, onClose }) => {
                 <Text type="secondary">Ingresá tus datos para continuar</Text>
 
                 <div className="space-y-3 mt-4 text-left">
-                    <label className="text-sm text-gray-600">Correo electrónico</label>
+                    <label className="text-sm text-gray-600 font-bold">Usuario o Email</label>
                     <Input
                         placeholder="User"
                         value={usuario}
@@ -58,7 +53,7 @@ const Login = ({ open, onClose }) => {
                         size="large"
                     />
 
-                    <label className="text-sm text-gray-600">Contraseña</label>
+                    <label className="text-sm text-gray-600 font-bold">Contraseña</label>
                     <Input.Password
                         placeholder="••••••••"
                         value={password}
@@ -67,7 +62,7 @@ const Login = ({ open, onClose }) => {
                     />
 
                     <Button
-                        type="primary"
+                        style={{ background: "#d82737", color: "white" }}
                         block
                         size="large"
                         loading={loading}

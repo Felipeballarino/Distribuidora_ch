@@ -1,20 +1,14 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'MontserratExtraBold';
-  src: url('./assets/fonts/Montserrat-ExtraBold.ttf') format('truetype');
+  font-family: 'Montserrat';
+  src: url('./assets/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
 }
 
-@font-face {
-  font-family: 'MontserratMedium';
-  src: url('./assets/fonts/Montserrat-Medium.ttf') format('truetype');
-}
+
 
 :root {
-  font-family: 'MontserratMedium', sans-serif;
-  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
-
-
+  font-family: 'Montserrat', sans-serif;
 }
 
 
@@ -43,6 +37,94 @@ body {
   width:40px !important;
   font-size:23px !important
 }
+
+/* imput Search */
+.custom-search{
+  border:2px solid  #d82737;
+  border-radius: 0.5rem; 
+}
+.custom-search .ant-input-affix-wrapper {
+  border: 2px solid #d82737 !important;
+  border-radius: 0.5rem !important;
+  box-shadow: none !important;
+}
+
+.custom-search .ant-input-affix-wrapper:hover,
+.custom-search .ant-input-affix-wrapper:focus,
+.custom-search .ant-input-affix-wrapper-focused {
+  border: 2px solid #d82737 !important;
+  box-shadow: none !important;
+}
+
+.custom-search .ant-input {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.custom-search .ant-btn {
+  border:none;
+  border-left: 2px solid #d82737 !important;
+  background-color: white !important;
+  color: #d82737 !important;
+  border-radius: 0 0.5rem 0.5rem 0 !important;
+}
+
+.custom-search .ant-btn:hover{
+  border:none
+}
+.custom-search .ant-btn:focus {
+  border-left: 2px solid #d82737 !important;
+  background-color: white !important;
+  color: #d82737 !important;
+  box-shadow: none !important;
+}
+
+/* colapse categ y marcas */
+
+.ant-collapse-header-text {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #d82737;
+}
+.ant-collapse-expand-icon{
+  font-weight: bold;
+  font-size: 1rem;
+  color: #d82737;
+}
+
+.swiper-wrapper{
+  display: flex;
+  align-items: center;
+}
+
+.swiper-slide {
+  display: flex !important;
+  align-items: center !important;
+}
+.swiper-button-next{
+  background: white;
+    border-radius: 100%;
+    width: 30px !important;
+    height: 30px !important;
+}
+.swiper-button-next::after{
+  font-size: 20px !important; 
+  font-weight: bold !important;
+  color: red;
+}
+
+.swiper-button-prev{
+  background: white;
+    border-radius: 100%;
+    width: 30px !important;
+    height: 30px !important;
+}
+.swiper-button-prev::after{
+  font-size: 20px !important; 
+  font-weight: bold !important;
+  color: red;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

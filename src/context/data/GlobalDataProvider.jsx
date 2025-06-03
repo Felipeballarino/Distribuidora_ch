@@ -4,34 +4,43 @@ import { getCategories } from "../../services/categoriesServices";
 import { getMarcas } from "../../services/marcasServices";
 import { getProduct } from "../../services/productServices";
 import { GlobalDataContext } from "./GlobalDataContext";
+import Cookies from "js-cookie";
+
 
 export const GlobalDataProvider = ({ children }) => {
     const [categorias, setCategorias] = useState([]);
     const [marcas, setMarcas] = useState([]);
     const [productos, setProductos] = useState([]);
+    const [loading, setLoading] = useState(true)
+    const userCookie = Cookies.get('user_data');
+
 
     const fetchCategorias = async () => {
         const data = await getCategories();
-        setCategorias(data);
+        setCategorias(data.grupos);
     };
 
     const fetchMarcas = async () => {
         const data = await getMarcas();
-        setMarcas(data);
+        setMarcas(data.marcas);
     };
 
     const fetchProductos = async () => {
         const data = await getProduct();
-        setProductos(data);
+        setProductos(data.productos);
     };
 
 
 
     useEffect(() => {
-        fetchCategorias();
-        fetchMarcas();
-        fetchProductos();
-    }, []);
+        if (userCookie) {
+            setLoading(true)
+            fetchCategorias();
+            fetchMarcas();
+            fetchProductos();
+            setLoading(false)
+        }
+    }, [userCookie]);
 
     return (
         <GlobalDataContext.Provider
@@ -42,6 +51,7 @@ export const GlobalDataProvider = ({ children }) => {
                 fetchMarcas,
                 fetchProductos,
                 productos,
+                loading
             }}
         >
             {children}

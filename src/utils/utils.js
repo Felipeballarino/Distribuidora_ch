@@ -27,9 +27,9 @@ export const individualMensajeWhatsApp = (producto) => {
     let mensaje = "Hola, quiero consultar por el siguiente producto:%0A%0A";
 
 
-    mensaje += `• ${producto.nombre}%0A`;
-    mensaje += `  Codigo: ${producto.id}%0A`;
-    // mensaje += `  Cantidad: ${producto.quantity}%0A`;
+    mensaje += `• ${producto.descripcion}%0A`;
+    mensaje += `  Codigo: ${producto.codproducto}%0A`;
+    mensaje += `  Marca: ${producto.marca}%0A`;
     // mensaje += `  Precio: $${producto.precio} c/u%0A`;
     // mensaje += `  Color: ${producto.nombreColor}%0A`;
     // mensaje += `  Talle: ${producto.talle}%0A`;

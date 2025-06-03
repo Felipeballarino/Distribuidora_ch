@@ -1,36 +1,31 @@
-const API_URL = 'http://localhost:3000/productos';
+import Cookies from 'js-cookie';
+
+const API_URL = 'https://tiendagesip-production.up.railway.app/api/productos/1';
 
 export const getProduct = async () => {
-    const res = await fetch(API_URL);
-    return res.json();
-};
+    try {
+        const TOKEN_USER = Cookies.get('user_data_token');
+        const USER = JSON.parse(Cookies.get('user_data') || '{}');
 
-export const getProductByID = async (id) => {
-    const res = await fetch(`${API_URL}/${id}`);
-    return res.json();
-};
+        const codusuario = USER?.codusuario || 0;
 
-export const createProduct = async (userData) => {
-    const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(userData),
-    });
-    return res.json();
-};
+        const res = await fetch(`${API_URL}/${codusuario}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN_USER}`
+            }
+        });
 
-export const updateProduct = async (id, userData) => {
-    const res = await fetch(`${API_URL}/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(userData),
-    });
-    return res.json();
-};
+        if (!res.ok) {
+            const errorText = await res.text();
+            throw new Error(`Error ${res.status}: ${errorText}`);
+        }
 
-export const deleteProduct = async (id) => {
-    const res = await fetch(`${API_URL}/${id}`, {
-        method: 'DELETE',
-    });
-    return res.ok;
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.error('Error al obtener productos:', error);
+        return []; // Podés devolver un array vacío u otro fallback
+    }
 };

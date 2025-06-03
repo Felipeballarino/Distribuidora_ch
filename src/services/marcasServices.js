@@ -1,36 +1,28 @@
-const API_URL = 'http://localhost:3000/marcas';
+import Cookies from 'js-cookie';
+
+const API_URL = 'https://tiendagesip-production.up.railway.app/api/marcas/1';
 
 export const getMarcas = async () => {
-    const res = await fetch(API_URL);
-    return res.json();
-};
+    try {
+        const TOKEN_USER = Cookies.get('user_data_token');
 
-export const getMarcasByID = async (id) => {
-    const res = await fetch(`${API_URL}/${id}`);
-    return res.json();
-};
+        const res = await fetch(API_URL, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN_USER}`
+            }
+        });
+        if (!res.ok) {
+            const errorText = await res.text();
+            throw new Error(`Error ${res.status}: ${errorText}`);
+        }
 
-export const createMarcas = async (userData) => {
-    const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(userData),
-    });
-    return res.json();
-};
+        const data = await res.json();
+        return data;
 
-export const updateMarcas = async (id, userData) => {
-    const res = await fetch(`${API_URL}/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(userData),
-    });
-    return res.json();
-};
-
-export const deleteMarcas = async (id) => {
-    const res = await fetch(`${API_URL}/${id}`, {
-        method: 'DELETE',
-    });
-    return res.ok;
-};
+    } catch (error) {
+        console.error('Error al obtener marcas:', error);
+        return []; // Podés devolver un array vacío u otro fallback
+    }
+}

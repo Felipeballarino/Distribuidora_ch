@@ -1,21 +1,21 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import Layout from '../components/Layout';
 import FiltrosCatalogos from '../components/FiltrosCatalogos';
 import { useGlobalData } from '../context/data/useGlobalData';
 import ProductCardWpp from '../components/ProductCardWpp';
+import { Spin } from 'antd'; // asegurate de tener antd instalado
 
 
 const Productos = () => {
-    const { categorias, marcas, productos } = useGlobalData();
+    const { categorias, marcas, productos, loading } = useGlobalData();
 
     const [searchParams, setSearchParams] = useSearchParams();
-
     const [marcaSeleccionada, setMarcaSeleccionada] = useState([]);
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState([]);
+    const [busqueda, setBusqueda] = useState("");
 
-    // Leer de la URL al cargar
     useEffect(() => {
         const marcasFromURL = searchParams.get("marcas")?.split(",") || [];
         const categoriasFromURL = searchParams.get("categorias")?.split(",") || [];
@@ -23,7 +23,6 @@ const Productos = () => {
         setCategoriaSeleccionada(categoriasFromURL);
     }, [searchParams]);
 
-    // Actualizar la URL cuando cambia el filtro
     useEffect(() => {
         const params = {};
         if (marcaSeleccionada.length > 0) {
@@ -35,30 +34,53 @@ const Productos = () => {
         setSearchParams(params);
     }, [marcaSeleccionada, categoriaSeleccionada, setSearchParams]);
 
-    const productosFiltrados = productos.filter(product => {
-        const coincideMarca = marcaSeleccionada.length > 0 ? marcaSeleccionada.includes(product.marcaNombre) : true
-        const coincideCategoria = categoriaSeleccionada.length > 0 ? categoriaSeleccionada.includes(product.categoriaNombre) : true
-        return coincideMarca && coincideCategoria
-    })
+    const productosFiltrados = productos?.filter(product => {
+        const coincideMarca = marcaSeleccionada.length > 0 ? marcaSeleccionada.includes(product.marca) : true
+        const coincideCategoria = categoriaSeleccionada.length > 0 ? categoriaSeleccionada.includes(product.grupo) : true
+        const coincideBusqueda = busqueda
+            ? [
+                product.descripcion,
+                product.marcaNombre,
+                product.categoriaNombre
+            ]
+                .some(campo =>
+                    campo?.toLowerCase().includes(busqueda.toLowerCase())
+                )
+            : true;
 
+        return coincideMarca && coincideCategoria && coincideBusqueda;
+    }) || [];
+
+    console.log(productosFiltrados)
     return (
-        <Layout >
-            <div className="p-6 md:grid md:grid-cols-8 flex flex-col gap-4 min-h-screen">
-                <FiltrosCatalogos
-                    marcas={marcas}
-                    categorias={categorias}
-                    marcaSeleccionada={marcaSeleccionada}
-                    setMarcaSeleccionada={setMarcaSeleccionada}
-                    categoriaSeleccionada={categoriaSeleccionada}
-                    setCategoriaSeleccionada={setCategoriaSeleccionada}
-                />
-                <div className='md:col-span-6 md:grid md:grid-cols-3 gap-4 '>
-                    {productosFiltrados.map((product) => (
-                        <ProductCardWpp key={product.id} product={product} />
-                    ))}
+        <Layout>
+            {!loading && !productosFiltrados ? (
+                <div className="col-span-3 flex justify-center items-center min-h-screen">
+                    <Spin size="large" />
                 </div>
-
-            </div>
+            )
+                :
+                <div className="p-6 md:grid md:grid-cols-8 flex flex-col gap-4 min-h-screen">
+                    <FiltrosCatalogos
+                        marcas={marcas}
+                        categorias={categorias}
+                        marcaSeleccionada={marcaSeleccionada}
+                        setMarcaSeleccionada={setMarcaSeleccionada}
+                        categoriaSeleccionada={categoriaSeleccionada}
+                        setCategoriaSeleccionada={setCategoriaSeleccionada}
+                        onSearch={setBusqueda}
+                    />
+                    <div className='md:col-span-6 md:grid md:grid-cols-3 gap-4'>
+                        {productosFiltrados.length > 0 ? (
+                            productosFiltrados.map((product) => (
+                                <ProductCardWpp key={product.id} product={product} />
+                            ))
+                        ) : (
+                            <h1 className="col-span-3 text-center">No hay productos</h1>
+                        )}
+                    </div>
+                </div>
+            }
         </Layout>
     )
 }
