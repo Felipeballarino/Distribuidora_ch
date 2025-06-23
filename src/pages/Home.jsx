@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Layout from '../components/Layout'
-import banner from "../assets/banner.jpg"
+import rack from "../assets/rack.png"
 import { Mail, Phone, Place } from "@mui/icons-material";
 import { TextField, Button, Box, Snackbar, Alert } from "@mui/material";
 import { sendEmail } from "../services/EmailSevice";
-import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import CarouselMarcas from '../components/carouselMarcas';
+
+import banner from "../assets/banner.jpg"
 
 const Home = () => {
     const [open, setOpen] = useState(false);
@@ -48,7 +48,7 @@ const Home = () => {
         <Layout>
             <section className='md:h-[75vh] h-[50vh] relative'>
                 <img
-                    src={banner}
+                    src={rack}
                     alt="banner1"
                     className="h-full w-full object-cover absolute top-0 left-0 -z-10"
                 />
@@ -61,27 +61,45 @@ const Home = () => {
             <section className='flex justify-center py-20'>
                 <h1 className='md:text-4xl uppercase font-bold'>CH importadora y distribuidora.</h1>
             </section>
-            <section className='bg-[#d82737] md:min-h-screen px-10 py-10'>
+            <section className='bg-[#d82737] px-10 py-15'>
                 <div>
                     <h2 className='md:text-4xl text-3xl text-white uppercase font-bold'>Nuestra Historia</h2>
-                    <div className='text-white mt-5 uppercase font-semibold'>
-                        <p className='md:text-xl text-base mb-4'>
-                            En <b>Distribuidora CH, llevamos más de una década de trayectoria, forjada con esfuerzo,
-                                compromiso y el apoyo incondicional de nuestra familia. Desde nuestra fundación en 2008</b>,
-                            cada paso ha sido una prueba de dedicación, superando obstáculos y cosechando éxitos gracias
-                            a la determinación que nos define.
-                        </p>
-                        <p className='md:text-xl text-base'>
-                            Creemos que el <b>trabajo arduo</b>, la <b>persistencia</b> y la <b>pasión</b> por lo que hacemos son
-                            los pilares que nos han permitido crecer. Hoy, seguimos adelante con la misma convicción:
-                            transformar desafíos en oportunidades y construir un futuro sólido para quienes confían en nosotros.
-                        </p>
+                    <div className='flex md:flex-row flex-col w-full gap-3'>
+                        <div className='text-white mt-5 uppercase font-semibold md:w-2/3'>
+                            <p className='md:text-xl text-base mb-4'>
+                                En <b>Distribuidora CH, llevamos más de una década de trayectoria, forjada con esfuerzo,
+                                    compromiso y el apoyo incondicional de nuestra familia. Desde nuestra fundación en 2008</b>,
+                                cada paso ha sido una prueba de dedicación, superando obstáculos y cosechando éxitos gracias
+                                a la determinación que nos define.
+                            </p>
+                            <p className='md:text-xl text-base'>
+                                Creemos que el <b>trabajo arduo</b>, la <b>persistencia</b> y la <b>pasión</b> por lo que hacemos son
+                                los pilares que nos han permitido crecer. Hoy, seguimos adelante con la misma convicción:
+                                transformar desafíos en oportunidades y construir un futuro sólido para quienes confían en nosotros.
+                            </p>
+                        </div>
+                        <div className='md:w-1/3'>
+                            <img
+                                src={banner}
+                                alt="banner1"
+                            // className="w-1/2"
+                            />
+                        </div>
                     </div>
                 </div>
                 {/* <div className='mt-[4rem]'>
-                    <h2 className='md:text-4xl text-center text-3xl text-white font-bold'>Nuestras Marcas</h2>
-                    <CarouselMarcas />
-                </div> */}
+                    <h2 className='md:text-4xl text-center text-3xl text-white font-bold uppercase'>Algunas Marcas</h2>
+                    {/* <CarouselMarcas /> */}
+                {/* <div className='grid grid-cols-3'>
+                        {
+                            imgMarcas.map(img => (
+                                <div className='flex items-center justify-center'>
+                                    <img src={img.src} alt='' className='w-[200px]' />
+                                </div>
+                            ))
+                        }
+                    </div> */}
+                {/* </div> */}
             </section>
             <section className='px-10 py-10 ' >
                 <h1 className='md:text-4xl text-3xl text-[#d82737] uppercase font-bold'>Contacto y Redes</h1>
@@ -209,7 +227,7 @@ const Home = () => {
                     </Alert>
                 </Snackbar>
             </section>
-        </Layout>
+        </Layout >
     )
 }
 

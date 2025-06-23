@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
-import { loginUserNot } from "../../services/usersSerivices";
+import { loginUserNot, verificarToken } from "../../services/usersSerivices";
 import Cookies from "js-cookie";
 
 export const AuthProvider = ({ children }) => {
@@ -30,14 +30,32 @@ export const AuthProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        const userCookie = Cookies.get('user_data');
+        const checkToken = async () => {
+            const token = Cookies.get('user_data_token');
 
-        if (userCookie) {
-            setUser(JSON.parse(userCookie));
-        } else {
-            loginNotUser(); // Si no hay usuario, login anónimo
-        }
+            if (token) {
+                try {
+                    const resp = await verificarToken(token);
+                    if (resp.success) {
+                        const userCookie = Cookies.get('user_data');
+                        if (userCookie) {
+                            setUser(JSON.parse(userCookie));
+                        }
+                    } else {
+                        await logout(); // Token vencido o inválido
+                    }
+                } catch (error) {
+                    console.error("Error al verificar el token", error);
+                    await logout(); // Por si hay error en la API, cerramos sesión también
+                }
+            } else {
+                await loginNotUser(); // No hay token, login anónimo
+            }
+        };
+
+        checkToken();
     }, []);
+
 
     return (
         <AuthContext.Provider value={{ user, login, logout }}>

@@ -1,19 +1,16 @@
-// context/GlobalDataProvider.jsx
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { getCategories } from "../../services/categoriesServices";
 import { getMarcas } from "../../services/marcasServices";
 import { getProduct } from "../../services/productServices";
 import { GlobalDataContext } from "./GlobalDataContext";
-import Cookies from "js-cookie";
-
+import { AuthContext } from "../auth/AuthContext";
 
 export const GlobalDataProvider = ({ children }) => {
+    const { user } = useContext(AuthContext);
     const [categorias, setCategorias] = useState([]);
     const [marcas, setMarcas] = useState([]);
     const [productos, setProductos] = useState([]);
-    const [loading, setLoading] = useState(true)
-    const userCookie = Cookies.get('user_data');
-
+    const [loading, setLoading] = useState(true);
 
     const fetchCategorias = async () => {
         const data = await getCategories();
@@ -30,17 +27,21 @@ export const GlobalDataProvider = ({ children }) => {
         setProductos(data.productos);
     };
 
-
-
     useEffect(() => {
-        if (userCookie) {
-            setLoading(true)
-            fetchCategorias();
-            fetchMarcas();
-            fetchProductos();
-            setLoading(false)
-        }
-    }, [userCookie]);
+        setLoading(true);
+        const cargarDatos = async () => {
+            if (user) {
+                await Promise.all([
+                    fetchCategorias(),
+                    fetchMarcas(),
+                    fetchProductos()
+                ]);
+            }
+            setLoading(false);
+        };
+
+        cargarDatos();
+    }, [user]);
 
     return (
         <GlobalDataContext.Provider

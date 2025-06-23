@@ -1,4 +1,5 @@
 const API_URL = 'https://tiendagesip-production.up.railway.app/api/login/1';
+const VERIFICAR_URL = 'https://tiendagesip-production.up.railway.app/verificar_token'
 
 
 export const loginUser = async (username, password) => {
@@ -31,3 +32,21 @@ export const loginUserNot = async () => {
         return null;
     }
 };
+
+
+export const verificarToken = async (TOKEN_SESSION) => {
+    try {
+        const res = await fetch(VERIFICAR_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN_SESSION}`
+            },
+        });
+        const data = await res.json();
+        return data
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}

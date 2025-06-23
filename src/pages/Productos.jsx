@@ -51,7 +51,6 @@ const Productos = () => {
         return coincideMarca && coincideCategoria && coincideBusqueda;
     }) || [];
 
-    console.log(productosFiltrados)
     return (
         <Layout>
             {!loading && !productosFiltrados ? (
