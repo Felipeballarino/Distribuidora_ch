@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
+import { API_URL_PRODUCTOS } from '../constants/routes';
 
-const API_URL = 'https://tiendagesip-production.up.railway.app/api/productos/1';
 
 export const getProduct = async () => {
     try {
@@ -9,7 +9,7 @@ export const getProduct = async () => {
 
         const codusuario = USER?.codusuario || 0;
 
-        const res = await fetch(`${API_URL}/${codusuario}`, {
+        const res = await fetch(`${API_URL_PRODUCTOS}/${codusuario}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

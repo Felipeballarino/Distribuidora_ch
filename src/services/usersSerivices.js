@@ -1,10 +1,8 @@
-const API_URL = 'https://tiendagesip-production.up.railway.app/api/login/1';
-const VERIFICAR_URL = 'https://tiendagesip-production.up.railway.app/verificar_token'
-
+import { API_URL_LOGIN, VERIFICAR_URL } from "../constants/routes";
 
 export const loginUser = async (username, password) => {
     try {
-        const res = await fetch(API_URL, {
+        const res = await fetch(API_URL_LOGIN, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -21,7 +19,7 @@ export const loginUser = async (username, password) => {
 };
 export const loginUserNot = async () => {
     try {
-        const res = await fetch(API_URL, {
+        const res = await fetch(API_URL_LOGIN, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
         });

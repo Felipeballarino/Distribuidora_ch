@@ -1,12 +1,11 @@
 import Cookies from 'js-cookie';
-
-const API_URL = 'https://tiendagesip-production.up.railway.app/api/grupos/1';
+import { API_URL_CATEGORIAS } from '../constants/routes';
 
 export const getCategories = async () => {
     try {
         const TOKEN_USER = Cookies.get('user_data_token');
 
-        const res = await fetch(API_URL, {
+        const res = await fetch(API_URL_CATEGORIAS, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

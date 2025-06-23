@@ -1,3 +1,5 @@
+import { SEND_EMAIL } from "../constants/routes";
+
 export async function sendEmail(data) {
     console.log("Enviando datos:", data);
     try {
@@ -7,7 +9,7 @@ export async function sendEmail(data) {
             mensaje: data.mensaje,
             destinatario: "pabloch79@hotmail.com"
         };
-        const response = await fetch("https://enddg-production.up.railway.app/enviar-email", {
+        const response = await fetch(SEND_EMAIL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
