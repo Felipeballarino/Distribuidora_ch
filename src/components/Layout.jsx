@@ -1,5 +1,4 @@
-import React from 'react'
-import Header from './header'
+import Header from './Header'
 import Footer from './Footer'
 import { FloatButton } from 'antd'
 import { WhatsAppOutlined } from '@ant-design/icons'
