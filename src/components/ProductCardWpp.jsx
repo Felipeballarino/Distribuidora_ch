@@ -1,11 +1,9 @@
-import foto1 from "../assets/remera.webp"
 import { Button } from 'antd';
 import { WhatsAppOutlined } from '@ant-design/icons'
 import { formatearPrecio, individualMensajeWhatsApp } from '../utils/utils';
 import Swal from 'sweetalert2';
 
 const ProductCardWpp = ({ product }) => {
-    console.log(product)
     return (
         <div className='border-[#d82737] border-2 rounded-lg p-4 shadow-md relative h-fit md:h-full flex flex-col justify-between '>
             {product.descuento &&
@@ -13,7 +11,7 @@ const ProductCardWpp = ({ product }) => {
                     {Math.floor(product.descuento)}% OFF
                 </div>
             }
-            <img src={foto1} alt={product.nombre} className='w-full h-48 object-cover' />
+            <img src={product.img1} alt={product.nombre} className='w-full h-48 object-cover' />
             <h3 className='text-base uppercase font-bold'>{product.descripcion}</h3>
             <p className='text-xs font-medium   text-gray-400 h-3'>{product.marca}</p>
             <div>

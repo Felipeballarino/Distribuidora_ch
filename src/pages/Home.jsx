@@ -108,7 +108,7 @@ const Home = () => {
                         <ul className="list-none flex flex-col gap-1 md:text-lg">
                             <li className='flex items-center gap-1'><Mail sx={{ color: "#d82737" }} /> pabloch79@hotmail.com</li>
                             <li className='flex items-center gap-1'><Phone sx={{ color: "#d82737" }} /> +549 3535 669 619</li>
-                            <li className='flex items-center gap-1'><Place sx={{ color: "#d82737" }} /> Araucanos 2555, X5900 Villa Nueva, Córdoba</li>
+                            <li className='flex items-center gap-1'><Place sx={{ color: "#d82737" }} /> Araucanos 2555, X5900 Villa Maria, Córdoba</li>
                         </ul>
                     </Box>
 

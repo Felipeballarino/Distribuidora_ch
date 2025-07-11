@@ -18,8 +18,7 @@ const Login = ({ open, onClose }) => {
     const handleLogin = async () => {
         setLoading(true);
         const data = await loginUser(usuario, password);
-
-        if (data) {
+        if (data.success) {
             login(data);
             onClose();
         } else {
