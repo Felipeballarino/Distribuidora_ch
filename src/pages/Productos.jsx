@@ -59,7 +59,7 @@ const Productos = () => {
                 </div>
             )
                 :
-                <div className="p-6 md:grid md:grid-cols-8 flex flex-col gap-4 min-h-screen">
+                <div className="p-6 md:grid md:grid-cols-8 flex flex-col gap-4 min-h-screen items-start">
                     <FiltrosCatalogos
                         marcas={marcas}
                         categorias={categorias}

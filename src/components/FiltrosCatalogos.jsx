@@ -35,7 +35,7 @@ const FiltrosCatalogos = ({
     };
 
     return (
-        <div className="flex flex-col col-span-2 ¿">
+        <div className="flex flex-col col-span-2 w-full md:static relative md:h-auto h-[130px]">
             <div className="mb-4">
                 <Search
                     placeholder="Buscar productos"
@@ -81,10 +81,10 @@ const FiltrosCatalogos = ({
             </div>
 
             {/* Mobile: filtros en acordeón */}
-            <div className="md:hidden flex gap-4">
+            <div className="md:hidden absolute top-[45%] w-full z-50 flex gap-4 ">
                 <div className="w-1/2 border-[#d82737] border-2 rounded h-fit">
                     <Collapse ghost >
-                        <Panel header="Categorías" key="1" className="uppercase font-bold">
+                        <Panel header="Categorías" key="1" className="uppercase font-bold bg-white">
                             <ul className="flex flex-col gap-1">
                                 {categorias.map((cat) => (
                                     <Checkbox
@@ -103,7 +103,7 @@ const FiltrosCatalogos = ({
                 </div>
                 <div className="w-1/2 border-[#d82737] border-2 rounded h-fit">
                     <Collapse ghost>
-                        <Panel header="Marcas" key="2" className="uppercase font-bold" >
+                        <Panel header="Marcas" key="2" className="uppercase font-bold bg-white" >
                             <ul className="flex flex-col gap-1">
                                 {marcas.map((marca) => (
                                     <Checkbox
@@ -113,7 +113,7 @@ const FiltrosCatalogos = ({
                                             handleMarcaChange(e.target.checked, marca.marca)
                                         }
                                     >
-                                        {marca.marca}
+                                        <span className="block break-words whitespace-normal">{marca.marca}</span>
                                     </Checkbox>
                                 ))}
                             </ul>

@@ -3,15 +3,19 @@ import { WhatsAppOutlined } from '@ant-design/icons'
 import { formatearPrecio, individualMensajeWhatsApp } from '../utils/utils';
 import Swal from 'sweetalert2';
 
+import imgNoDisp from "../assets/nodisp.jpg"
+
 const ProductCardWpp = ({ product }) => {
     return (
-        <div className='border-[#d82737] border-2 rounded-lg p-4 shadow-md relative h-fit md:h-full flex flex-col justify-between '>
+        <div className='border-[#d82737] border-2 rounded-lg p-4 shadow-md relative h-fit  flex flex-col justify-between md:mb-0 mb-4 '>
             {product.descuento &&
                 <div className='absolute top-4 left-0 bg-[#d82737] text-white uppercase py-1 px-2 rounded-r'>
                     {Math.floor(product.descuento)}% OFF
                 </div>
             }
-            <img src={product.img1} alt={product.nombre} className='w-full h-48 object-cover' />
+            {product.img1 ?
+                <img src={product.img1} alt={product.nombre} className='w-full h-48 object-cover' /> :
+                <img src={imgNoDisp} alt={product.nombre} className='w-full h-48 object-cover' />}
             <h3 className='text-base uppercase font-bold'>{product.descripcion}</h3>
             <p className='text-xs font-medium   text-gray-400 h-3'>{product.marca}</p>
             <div>
