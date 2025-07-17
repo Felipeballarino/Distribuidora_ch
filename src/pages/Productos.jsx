@@ -41,7 +41,8 @@ const Productos = () => {
             ? [
                 product.descripcion,
                 product.marcaNombre,
-                product.categoriaNombre
+                product.categoriaNombre,
+                product.codproducto
             ]
                 .some(campo =>
                     campo?.toLowerCase().includes(busqueda.toLowerCase())
