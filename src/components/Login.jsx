@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { loginUser } from "../services/usersSerivices"
 import { useAuth } from '../context/auth/useAuth';
 import Swal from 'sweetalert2'
+import { useGlobalCart } from '../context/cart/useGlobalCart';
 const { Title, Text } = Typography;
 
 
@@ -14,12 +15,14 @@ const Login = ({ open, onClose }) => {
 
     const { login } = useAuth();
 
+    const { clearCart } = useGlobalCart()
 
     const handleLogin = async () => {
         setLoading(true);
         const data = await loginUser(usuario, password);
         if (data.success) {
             login(data);
+            clearCart()
             onClose();
         } else {
             Swal.fire({

@@ -1,17 +1,15 @@
 export const generarMensajeWhatsApp = (cart, cartTotal) => {
     if (!cart.length) return "";
 
-    let mensaje = "Hola, quiero comprar los siguientes productos:%0A%0A";
+    let mensaje = "Hola, quisiera hacer un pedido con los siguientes productos:%0A%0A";
 
     cart.forEach(item => {
-        const subtotal = item.precio * item.quantity;
-        mensaje += `• ${item.nombre}%0A`;
-        mensaje += `  Codigo: ${item.id}%0A`;
-        mensaje += `  Cantidad: ${item.quantity}%0A`;
-        mensaje += `  Precio: $${item.precio} c/u%0A`;
-        mensaje += `  Color: ${item.nombreColor}%0A`;
-        mensaje += `  Talle: ${item.talle}%0A`;
-        mensaje += `  Subtotal: $${subtotal}%0A%0A`;
+        const subtotal = formatearPrecio(item.precio_final * item.cantidad);
+        mensaje += `• ${item.descripcion}%0A`;
+        mensaje += `  Codigo: ${item.codproducto}%0A`;
+        mensaje += `  Cantidad: ${item.cantidad}%0A`;
+        mensaje += `  Precio: $${item.precio_final} c/u%0A`;
+        mensaje += `  Subtotal: ${subtotal}%0A%0A`;
 
     });
 

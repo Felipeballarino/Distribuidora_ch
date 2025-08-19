@@ -25,7 +25,6 @@ const Home = () => {
             mensaje: data.get("mensaje"),
         };
 
-        console.log("Formulario enviado:", formDataObject);
         const response = await sendEmail(formDataObject);
 
         if (response.mensaje === "Correo enviado con éxito") {

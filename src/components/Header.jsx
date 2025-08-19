@@ -4,8 +4,10 @@ import Login from './Login'
 import { useAuth } from '../context/auth/useAuth'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import logo from "../assets/logo.png"
+import { Badge, Button } from "antd"
+import { ShoppingFilled } from '@ant-design/icons'
 
-const Header = () => {
+const Header = ({ showDrawer, badge }) => {
     const [modalOpen, setModalOpen] = useState(false);
 
     const { user, logout } = useAuth()
@@ -14,7 +16,7 @@ const Header = () => {
             <Link to={"/"} className='flex md:h-[inherit] md:w-auto w-[35%]'>
                 <img src={logo} alt="logo" />
             </Link>
-            <div>
+            <div className="flex items-center gap-4">
                 {user?.codusuario != 0 ?
                     <>
                         <button onClick={logout} className='text-white text-sm hidden md:flex items-center gap-1 text-center cursor-pointer font-bold'>
@@ -44,6 +46,10 @@ const Header = () => {
                         </button>
                     </>
                 }
+                <Badge count={badge} style={{ background: "white", color: '#d82737', fontWeight: "bold", border: '#d82737 solid 1px' }} >
+                    <Button onClick={showDrawer} shape="circle" icon={<ShoppingFilled style={{ color: '#d82737' }} />} />
+                </Badge>
+
             </div>
             <Login open={modalOpen} onClose={() => setModalOpen(false)} />
         </header >

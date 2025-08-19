@@ -4,14 +4,16 @@ import './index.css'
 import App from './App.jsx'
 import { GlobalDataProvider } from './context/data/GlobalDataProvider.jsx'
 import { AuthProvider } from './context/auth/AuthProvider.jsx'
-
+import { GlobalCartProvider } from './context/cart/GlobalCartProvider.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <GlobalDataProvider>
-        <App />
-      </GlobalDataProvider>
+      <GlobalCartProvider>
+        <GlobalDataProvider>
+          <App />
+        </GlobalDataProvider>
+      </GlobalCartProvider>
     </AuthProvider>
   </StrictMode>,
 )

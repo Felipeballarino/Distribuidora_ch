@@ -3,11 +3,18 @@ import Footer from './Footer'
 import { FloatButton } from 'antd'
 import { WhatsAppOutlined } from '@ant-design/icons'
 import { generalMensajeWhatsApp } from '../utils/utils'
+import Cart from './Cart'
+
+
+import { useGlobalCart } from '../context/cart/useGlobalCart'
 
 const Layout = ({ children }) => {
+    const { openCart, onCloseCart, showDrawerCart, cartItems } = useGlobalCart()
     return (
         <div className='flex flex-col min-h-screen'>
-            <Header />
+            <Cart open={openCart} onClose={onCloseCart} />
+
+            <Header showDrawer={showDrawerCart} badge={cartItems} />
             <main className='mt-[80px]' >
                 {children}
             </main>

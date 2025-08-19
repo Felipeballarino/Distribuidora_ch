@@ -1,5 +1,5 @@
-import { Button } from 'antd';
-import { WhatsAppOutlined } from '@ant-design/icons'
+import { Button, Image } from 'antd';
+import { EyeOutlined, WhatsAppOutlined } from '@ant-design/icons'
 import { formatearPrecio, individualMensajeWhatsApp } from '../utils/utils';
 import Swal from 'sweetalert2';
 
@@ -15,8 +15,22 @@ const ProductCardWpp = ({ product }) => {
                 </div>
             }
             {product.img1 ?
-                <img src={product.img1} alt={product.nombre} className='w-full h-48 object-cover' /> :
-                <img src={imgNoDisp} alt={product.nombre} className='w-full h-48 object-cover' />}
+                <Image
+                    style={{ objectFit: "cover" }}
+                    width="100%"
+                    height="12rem"
+                    src={product.img1}
+                    alt={product.nombre}
+                />
+                :
+                <Image
+                    style={{ objectFit: "cover" }}
+                    width="100%"
+                    height="12rem"
+                    src={imgNoDisp}
+                    alt={product.nombre}
+                />
+            }
             <h3 className='text-base uppercase h-12 font-bold'>{product.descripcion}</h3>
             <p className='text-xs font-medium   text-gray-400 h-3'>COD: {product.codproducto}</p>
             <p className='text-xs font-medium   text-gray-400 h-3'>{product.marca}</p>

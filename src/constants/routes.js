@@ -7,6 +7,7 @@ export const API_URL_CATEGORIAS = `${apiUrl}/api/grupos/${userType}`;
 export const API_URL_MARCAS = `${apiUrl}/api/marcas/${userType}`;
 export const API_URL_PRODUCTOS = `${apiUrl}/api/productos/${userType}`;
 export const API_URL_LOGIN = `${apiUrl}/api/login/${userType}`;
+export const SEND_ORDER = `${apiUrl}/api/nuevopedido`
 export const VERIFICAR_URL = `${apiUrl}/verificar_token`
 export const SEND_EMAIL = `${sendEmail}`
 

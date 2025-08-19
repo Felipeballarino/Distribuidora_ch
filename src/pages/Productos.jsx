@@ -4,12 +4,12 @@ import { useEffect } from 'react'
 import Layout from '../components/Layout';
 import FiltrosCatalogos from '../components/FiltrosCatalogos';
 import { useGlobalData } from '../context/data/useGlobalData';
-import ProductCardWpp from '../components/ProductCardWpp';
-import { Spin } from 'antd'; // asegurate de tener antd instalado
+import ProductCard from '../components/ProductCard';
+import { Spin } from 'antd';
 
 
 const Productos = () => {
-    const { categorias, marcas, productos, loading } = useGlobalData();
+    const { categorias, marcas, productos } = useGlobalData();
 
     const [searchParams, setSearchParams] = useSearchParams();
     const [marcaSeleccionada, setMarcaSeleccionada] = useState([]);
@@ -54,33 +54,28 @@ const Productos = () => {
 
     return (
         <Layout>
-            {!loading && !productosFiltrados ? (
-                <div className="col-span-3 flex justify-center items-center min-h-screen">
-                    <Spin size="large" />
+            <div className="p-6 md:grid md:grid-cols-8 md:items-start flex flex-col items-center gap-4 min-h-screen ">
+                <FiltrosCatalogos
+                    marcas={marcas}
+                    categorias={categorias}
+                    marcaSeleccionada={marcaSeleccionada}
+                    setMarcaSeleccionada={setMarcaSeleccionada}
+                    categoriaSeleccionada={categoriaSeleccionada}
+                    setCategoriaSeleccionada={setCategoriaSeleccionada}
+                    onSearch={setBusqueda}
+                />
+                <div className='md:col-span-6 md:grid md:grid-cols-3 gap-4'>
+                    {productosFiltrados.length > 0 ? (
+                        productosFiltrados.map((product) => (
+                            <ProductCard key={product.id} product={product} />
+                        ))
+                    ) : (
+                        <div className="md:col-span-3  flex justify-center items-center min-h-screen">
+                            <Spin size="large" />
+                        </div>
+                    )}
                 </div>
-            )
-                :
-                <div className="p-6 md:grid md:grid-cols-8 flex flex-col gap-4 min-h-screen items-start">
-                    <FiltrosCatalogos
-                        marcas={marcas}
-                        categorias={categorias}
-                        marcaSeleccionada={marcaSeleccionada}
-                        setMarcaSeleccionada={setMarcaSeleccionada}
-                        categoriaSeleccionada={categoriaSeleccionada}
-                        setCategoriaSeleccionada={setCategoriaSeleccionada}
-                        onSearch={setBusqueda}
-                    />
-                    <div className='md:col-span-6 md:grid md:grid-cols-3 gap-4'>
-                        {productosFiltrados.length > 0 ? (
-                            productosFiltrados.map((product) => (
-                                <ProductCardWpp key={product.id} product={product} />
-                            ))
-                        ) : (
-                            <h1 className="col-span-3 text-center">No hay productos</h1>
-                        )}
-                    </div>
-                </div>
-            }
+            </div>
         </Layout>
     )
 }

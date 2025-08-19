@@ -125,6 +125,10 @@ body {
   color: red;
 }
 
+.ant-spin-dot-holder{
+  color:#d82737 !important
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

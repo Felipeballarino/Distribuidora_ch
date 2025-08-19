@@ -1,7 +1,6 @@
 import { SEND_EMAIL } from "../constants/routes";
 
 export async function sendEmail(data) {
-    console.log("Enviando datos:", data);
     try {
         const dataSend = {
             nombre: data.nombre,
@@ -23,7 +22,6 @@ export async function sendEmail(data) {
         }
 
         const result = await response.json();
-        console.log("Respuesta del servidor:", result);
         return result;
     } catch (error) {
         console.error("Error en sendEmail:", error);
