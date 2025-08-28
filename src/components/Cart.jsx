@@ -43,7 +43,7 @@ const Cart = ({ open, onClose }) => {
 
     const sendWppSubmit = async () => {
         const mensaje = generarMensajeWhatsApp(cart, cartTotal);
-        const telefono = "5493534196213";
+        const telefono = "5493535669619";
         const url = `https://wa.me/${telefono}?text=${mensaje}`;
         window.open(url, '_blank');
         const result = await Swal.fire({

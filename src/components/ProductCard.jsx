@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
     return (
         <div className='border-[#d82737] border-2 rounded-lg p-4 shadow-md relative h-fit  flex flex-col justify-between md:mb-0 mb-4 '>
             {product.descuento &&
-                <div className='absolute top-4 left-0 bg-[#d82737] text-white uppercase py-1 px-2 rounded-r'>
+                <div className='absolute top-4 left-0 z-1  bg-[#d82737] text-white uppercase py-1 px-2 rounded-r'>
                     {Math.floor(product.descuento)}% OFF
                 </div>
             }
